@@ -20,6 +20,7 @@
     <script src="bower_components/ionic/release/js/ionic.bundle.js"></script><!-- phantom library, needed for Cordova api calls, added during build -->
     <link href="bower_components/ionic/release/css/ionic.css" rel="stylesheet"/>
     <link href="styles/docdroid.css" rel="stylesheet"/>
+    <link href="styles/status.css" rel="stylesheet"/>
     <script src="js/app.js"></script>
     <!-- recommended location of your JavaScript code relative to other JS files -->
     <script src="xdk/init-dev.js"></script>
@@ -30,16 +31,17 @@
 <ion-side-menus>
     <!--Ion Side Menu Content Houses the content for the main page-->
 <ion-side-menu-content style="padding-top:53px" >
-    Hello Mr.Robot
+    Hello Mr.Robot if you debug me you will see this is our content area that will be dynamically changing for the app.
     <ion-header-bar class ="bar-balanced">
     <div class ="buttons">
         <button class ="button icon button-clear ion-navicon-round" ng-click="openDrawer()"></button>
         </div>
         <h1 class="title" style="text-align: center">Medroid</h1>
-        <div class="buttons widget-container content-area horiz-area wrapping-col"> 
-        <button class ="button icon button-clear ion-android-notifications-none" ng-click="openDrawer()">Notifications</button>
-            <button class ="button icon button-clear ion-email" ng-click="openDrawer()">Inbox</button> 
-            <button class ="button icon button-clear ion-ios-circle-filled" ng-click="openDrawer()">Status</button> 
+        <div class="buttons widget-container content-area horiz-area wrapping-col" > 
+        <button class ="button" ng-click="openPopover($event)" ng-controller = "notificationPopoverCtrl">
+            <i class ="icon button-dark ion-android-notifications-none"></i></button>
+            <button class ="button" ng-click="openPopover($event)" ng-controller ="InboxPopoverCtrl"><i class ="icon button-dark ion-email"></i> </button> 
+            <button class ="button" ng-click="changeStatus()"><i class ="icon ion-ios-circle-filled {{statuscolor}}"></i>{{docstatus}}</button> 
         </div>
     </ion-header-bar>
     
