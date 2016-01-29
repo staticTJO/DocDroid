@@ -25,36 +25,18 @@
     <!-- recommended location of your JavaScript code relative to other JS files -->
     <script src="xdk/init-dev.js"></script>
     <script src="js/menurouter.js"></script>
+    
+<!--Initial Scripts for Main layout-->
+    <script src="Main-Layout/controllers/main-module.js"></script>
+    <script src="Main-Layout/controllers/NavCtrl.js"></script>
+    <script src="Main-Layout/controllers/InboxPopoverCtrl.js"></script>
+    <script src="Main-Layout/controllers/notificationPopoverCtrl.js"></script>
 </head>
 
-<body ng-controller="HomeMenuCtrl">
-<ion-side-menus>
-    <!--Ion Side Menu Content Houses the content for the main page-->
-<ion-side-menu-content style="padding-top:53px" >
-    Hello Mr.Robot if you debug me you will see this is our content area that will be dynamically changing for the app.
-    <ion-header-bar class ="bar-balanced">
-    <div class ="buttons">
-        <button class ="button icon button-clear ion-navicon-round" ng-click="openDrawer()"></button>
-        </div>
-        <h1 class="title" style="text-align: center">Medroid</h1>
-        <div class="buttons widget-container content-area horiz-area wrapping-col" > 
-        <button class ="button" ng-click="openPopover($event)" ng-controller = "notificationPopoverCtrl">
-            <i class ="icon button-dark ion-android-notifications-none"></i></button>
-            <button class ="button" ng-click="openPopover($event)" ng-controller ="InboxPopoverCtrl"><i class ="icon button-dark ion-email"></i> </button> 
-            <button class ="button" ng-click="changeStatus()"><i class ="icon ion-ios-circle-filled {{statuscolor}}"></i>{{docstatus}}</button> 
-        </div>
-    </ion-header-bar>
+<body>
     
-    </ion-side-menu-content>
     
-    <!--Ion Side menu drawer content-->
-    <ion-side-menu side ="left">
-   <ion-header-bar class ="bar-positive">
-        <h1 class="title" style="text-align: center" >Menu</h1>
-    </ion-header-bar>
-    </ion-side-menu>
-    
-    </ion-side-menus>
+<ion-nav-view></ion-nav-view>
     
 </body>
 </html>
