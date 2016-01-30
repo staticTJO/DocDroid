@@ -1,13 +1,20 @@
-var docdroid = angular.module('docdroid', ['ionic']);
+var mainlayout = angular.module('mainlayout');
 
 
-docdroid.controller("HomeMenuCtrl",function($scope,$ionicSideMenuDelegate){
+mainlayout.controller("NavCtrl",function($scope,$ionicSideMenuDelegate,$ionicHistory){
+
+    
             /*Initialize Status, this will be stored in database later on*/
         $scope.docstatus = "Available";
         $scope.statuscolor = "icon-available";
-    $scope.openDrawer = function (){
-        $ionicSideMenuDelegate.toggleLeft();
+        $scope.openDrawer = function (){
+        $ionicSideMenuDelegate.toggleLeft(); 
     };
+    
+        $scope.closeDrawer = function (){
+        $ionicSideMenuDelegate.toggleLeft();   
+    };
+    
     
     $scope.changeStatus = function(){
     
@@ -27,7 +34,9 @@ docdroid.controller("HomeMenuCtrl",function($scope,$ionicSideMenuDelegate){
     };
 });
 
-docdroid.controller("notificationPopoverCtrl", function($scope,$ionicPopover){
+
+mainlayout.controller("notificationPopoverCtrl", function($scope,$ionicPopover){
+    
 $ionicPopover.fromTemplateUrl('./templates/notificationPopover.html', {
     scope: $scope
   }).then(function(popover) {
@@ -55,7 +64,7 @@ $scope.popover.show($event);
     
 });
 
-docdroid.controller("InboxPopoverCtrl", function($scope,$ionicPopover){
+mainlayout.controller("InboxPopoverCtrl", function($scope,$ionicPopover){
 $ionicPopover.fromTemplateUrl('./templates/inboxPopover.html', {
     scope: $scope
   }).then(function(popover) {

@@ -1,13 +1,13 @@
-<ion-side-menus>
+<ion-side-menus enable-menu-with-back-views ="true">
    <!--Ion Side Menu Content Houses the content for the main page-->
    <ion-side-menu-content style="padding-top:53px" >
 
        
-      <ion-header-bar title ="Medroid" class ="bar-balanced">
+      <ion-header-bar align-title="center" class ="bar-balanced">
          <div class ="buttons">
             <button class ="button icon button-clear ion-navicon-round" ng-click="openDrawer()"></button>
          </div>
-        <!-- <h1 class="title" style="text-align: center">Medroid</h1>-->
+        <h1 class = "title">Medroid</h1>
          <div class="buttons widget-container content-area horiz-area wrapping-col" > 
             <button class ="button" ng-click="openPopover($event)" ng-controller = "notificationPopoverCtrl">
             <i class ="icon button-dark ion-android-notifications-none"></i></button>
