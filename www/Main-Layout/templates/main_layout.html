@@ -1,6 +1,9 @@
-<ion-side-menus enable-menu-with-back-views ="true">
+<ion-side-menus ng-controller ="MenuCtrl" enable-menu-with-back-views ="true">
    <!--Ion Side Menu Content Houses the content for the main page-->
-   <ion-side-menu-content style="padding-top:53px" >
+   <ion-side-menu-content>
+       <div style= "margin-top:43px">
+           <ion-nav-view></ion-nav-view>
+       </div>
 
        
       <ion-header-bar align-title="center" class ="bar-balanced">
@@ -10,7 +13,7 @@
         <h1 class = "title">Medroid</h1>
          <div class="buttons widget-container content-area horiz-area wrapping-col" > 
             <button class ="button" ng-click="openPopover($event)" ng-controller = "notificationPopoverCtrl">
-            <i class ="icon button-dark ion-android-notifications-none"></i></button>
+            <i class ="icon button-dark ion-android-notifications"></i></button>
             <button class ="button" ng-click="openPopover($event)" ng-controller ="InboxPopoverCtrl"><i class ="icon button-dark ion-email"></i> </button> 
             <button class ="button" ng-click="changeStatus()"><i class ="icon ion-ios-circle-filled {{statuscolor}}"></i>{{docstatus}}</button> 
          </div>
