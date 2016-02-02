@@ -1,4 +1,107 @@
 <div ng-controller ="passidCtrl">
-<h1>Patient {{patientid}} Profile</h1>
+    
+<ion-content class="has-header" > 
+    <h1 class="title"> Patient {{patientid}}</h1>
+    
+<ion-list can-swipe="listCanSwipe">
+        
+<ion-item >
+     <div class="card">
+  <div class="item item-divider">
+   Personal Info
+  </div>
+<div class="card">
+  <div class="item item-text-wrap">
+  First Name: Ben
+  </div>
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Last Name: Dover
+  </div>    
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Address: 112 Compton Ave
+</div> 
+        
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Phone: 1-800-Hotline-Bling
+</div> 
+        
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Date of Birth: Unknown
+</div> 
+        
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Sex: Caitlyn Jenner
+</div> 
+        
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Marital Status: Hypergamous
+</div> 
+        
+</div>
+    
+</div>  
+</ion-item>
+
+
+<ion-item>
+        <div class="card">
+  <div class="item item-divider">
+    Medical Info
+  </div>
+<div class="card">
+  <div class="item item-text-wrap">
+  Medication: Cocaine
+  </div>
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Diagnosis: Pink Eye
+  </div>    
+</div>
+        
+<div class="card">
+  <div class="item item-text-wrap">
+  Room: 205
+</div> 
+        
+</div>
+               
+<div class="card">
+  <div class="item item-text-wrap">
+  Primary Physician: Doctor Doom
+</div> 
+        
+</div>
+    
+</div>
+    
+</ion-item>
+ 
+</ion-list>
+    
+<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+    </ion-content>
+
+   
+
 
 </div>
