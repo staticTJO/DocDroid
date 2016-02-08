@@ -18,7 +18,7 @@ angular.module('docdroid')
     $rootScope.$stateParams = $stateParams;
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
     
- /* Starts the dailyrounds state inside the main state, this logic will change when login page is evemtually added*/
+ /* Starts the dailyrounds state inside the main state, this logic will change when login page is eventually added*/
     if(toState.name == 'main') {
        $state.go("main.dailyrounds");
     }

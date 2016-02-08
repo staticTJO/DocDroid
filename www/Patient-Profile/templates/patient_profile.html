@@ -1,107 +1,20 @@
-<div ng-controller ="passidCtrl">
-    
-<ion-content class="has-header" > 
-    <h1 class="title"> Patient {{patientid}}</h1>
-    
-<ion-list can-swipe="listCanSwipe">
-        
-<ion-item >
-     <div class="card">
-  <div class="item item-divider">
-   Personal Info
-  </div>
-<div class="card">
-  <div class="item item-text-wrap">
-  First Name: Ben
-  </div>
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Last Name: Dover
-  </div>    
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Address: 112 Compton Ave
-</div> 
-        
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Phone: 1-800-Hotline-Bling
-</div> 
-        
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Date of Birth: Unknown
-</div> 
-        
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Sex: Caitlyn Jenner
-</div> 
-        
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Marital Status: Hypergamous
-</div> 
-        
-</div>
-    
-</div>  
-</ion-item>
+<div ng-controller ="PatientCtrl">
 
+    <!--Button Tab Interface-->
+<div class="button-bar">
+      <a class="button" ng-click="tabclickpatientinfo()" ng-class="{'button-positive':var==1}">Patient Info</a>
+      <a class="button" ng-click="tabclickpatientmedical()" ng-class="{'button-positive':var==2}">Medical Info</a>
+      <a class="button" ng-click="tabclickpatientdiagnosis()" ng-class="{'button-positive':var==3}">Diagnosis</a>
+      <a class="button" ng-click="tabclickpatientcareteam()" ng-class="{'button-positive':var==4}">Care Team</a>
+      <a class="button" ng-click="tabclickpatientvitals()" ng-class="{'button-positive':var==5}">Live Vitals</a>
+</div>
 
-<ion-item>
-        <div class="card">
-  <div class="item item-divider">
-    Medical Info
-  </div>
-<div class="card">
-  <div class="item item-text-wrap">
-  Medication: Cocaine
-  </div>
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Diagnosis: Pink Eye
-  </div>    
-</div>
-        
-<div class="card">
-  <div class="item item-text-wrap">
-  Room: 205
-</div> 
-        
-</div>
-               
-<div class="card">
-  <div class="item item-text-wrap">
-  Primary Physician: Doctor Doom
-</div> 
-        
-</div>
+<!--Content Area for Patient Profile   -->
+    <div>
     
-</div>
-    
-</ion-item>
- 
-</ion-list>
-    
-<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
-    </ion-content>
+<ion-nav-view></ion-nav-view>   
+    </div>
 
-   
 
 
 </div>

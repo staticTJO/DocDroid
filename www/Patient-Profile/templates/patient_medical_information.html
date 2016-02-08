@@ -1,0 +1,75 @@
+<div class="row">
+    
+<!--Left Pane Area-->
+<div class="col col-50" ng-controller="alergiesCtrl" style="position:relative; margin-bottom:100px">
+
+    <div style="position:static"> 
+    
+    <ion-header-bar class="bar-assertive">
+      <h1 class="title">Alergies</h1>
+    </ion-header-bar>
+        
+    <ion-content >
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+        <ion-item ng-repeat="item in items" 
+                  item="item" class="item-remove-animate">
+          Item {{ item.id }}
+
+        </ion-item>
+
+      </ion-list>   
+        </ion-content>
+        
+
+                
+    
+    </div>
+        
+  
+
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+
+
+</div>
+    
+    
+    
+    
+    
+
+<!--Right Pane Area-->
+<div class="col col-50" ng-controller="medicationCtrl" style="position:relative; margin-bottom:100px">
+
+    <div style="position:static"> 
+    
+    <ion-header-bar class="bar-assertive">
+      <h1 class="title">Medications</h1>
+    </ion-header-bar>
+        
+    <ion-content >
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+        <ion-item ng-repeat="item in items" 
+                  item="item" class="item-remove-animate">
+          Item {{ item.id }}
+
+        </ion-item>
+
+      </ion-list>   
+        </ion-content>
+    </div>
+    
+
+    
+
+    
+
+      <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+
+
+</div>
+    
+    
+</div>
+
+
+

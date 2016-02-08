@@ -1,0 +1,18 @@
+
+<div ng-controller ="careteamCtrl"> 
+    
+    <ion-header-bar class="bar-assertive">
+      <h1 class="title">Care Team</h1>
+    </ion-header-bar>
+        
+    <ion-content style="margin-bottom:100px">
+      <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+        <ion-item ng-repeat="item in items" 
+                  item="item" class="item-remove-animate">
+          Item {{ item.id }}
+
+        </ion-item>
+
+      </ion-list>   
+        </ion-content>
+</div>
