@@ -16,7 +16,7 @@ angular.module('mainlayout', [])
     
       $stateProvider
         .state('main.dailyrounds', {
-          url: '/dailyrounds',
+          url: '/dailyrounds/:doctorid',
           templateUrl: './Daily-Rounds/templates/daily_rounds.html',
         });
         

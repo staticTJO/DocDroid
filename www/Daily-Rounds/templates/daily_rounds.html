@@ -20,15 +20,16 @@
       </div>
     </ion-header-bar>
 
-    <ion-content style="border: 3px blue solid">
+    <ion-content style="border: 3px blue solid" ng-controller ="DailyRoundsCtrl">
 
       <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
+        <h1> {{doctorID}}</h1>
       
       <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
 
         <ion-item ng-repeat="item in items" 
                   item="item"
-                  ng-controller ="DailyRoundsCtrl" ng-click="gotopatient()" class="item-remove-animate">
+                   ng-click="gotopatient()" class="item-remove-animate">
           Patient {{ item.id }}
           <ion-delete-button class="ion-minus-circled" 
                              ng-click="onItemDelete(item)">

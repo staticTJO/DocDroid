@@ -12,5 +12,6 @@ angular.module('docdroid',
     'mainlayout',
     'dailyrounds',
     'patientprofile',
+    'login',
   ]
 );

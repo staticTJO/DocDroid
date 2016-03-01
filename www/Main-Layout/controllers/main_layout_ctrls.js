@@ -120,3 +120,4 @@ $scope.popover.show($event);
   });
     
 });
+

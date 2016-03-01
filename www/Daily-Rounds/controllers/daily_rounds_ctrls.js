@@ -3,7 +3,7 @@ var dailyrounds = angular.module('dailyrounds');
 
 dailyrounds.controller("DailyRoundsCtrl",function($scope,$state,$stateParams){
     
-    $scope.patient = "patient1";
+    $scope.doctorID = $stateParams.doctorid;
     
 });
 

@@ -16,11 +16,10 @@ angular.module('docdroid')
   function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
     
- /* Starts the dailyrounds state inside the main state, this logic will change when login page is eventually added*/
     if(toState.name == 'main') {
-       $state.go("main.dailyrounds");
+       $state.go("main.dailyrounds",{doctorid:$stateParams.doctorid});
     }
 });
 }])
@@ -30,11 +29,17 @@ angular.module('docdroid')
 .config(function($stateProvider, $urlRouterProvider){
       
       $stateProvider
+        .state('login', {
+          url: '/login',
+          templateUrl: './Login/templates/login.html',
+        });
+    
+      $stateProvider
         .state('main', {
-          url: '/',
+          url: '/main/:doctorid',
           templateUrl: './Main-Layout/templates/main_layout.html',
         });
 
-$urlRouterProvider.otherwise("/");
+$urlRouterProvider.otherwise("/login");
 
 });
