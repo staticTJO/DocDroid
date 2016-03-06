@@ -61,15 +61,15 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
         showDelete: false
     };
   
-  $scope.edit = function(item) {
+  $scope.edit = function(patient) {
   };
     
- $scope.share = function(item) {
+ $scope.share = function(patient) {
   };
   
-  $scope.moveItem = function(item, fromIndex, toIndex) {
+  $scope.moveItem = function(patient, fromIndex, toIndex) {
     $scope.patients.splice(fromIndex, 1);
-    $scope.patients.splice(toIndex, 0, item);
+    $scope.patients.splice(toIndex, 0, patient);
   };
   
   $scope.onItemDelete = function(patient) {
