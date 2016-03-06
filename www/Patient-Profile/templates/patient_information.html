@@ -1,5 +1,5 @@
 
-<ion-content >
+<ion-content ng-controller = "PatientCtrl">
 <ion-list can-swipe="listCanSwipe">
     
 <div class="row" style="margin-bottom:100px">
@@ -9,41 +9,37 @@
     <div class="list card">
       <p1 class="item item-icon-left">
         <i class="ion-ios-arrow-right"></i>
-        First Name: John
+        First Name: {{firstName}}
       </p1>
       <p2 class="item item-icon-left">
         <i class="ion-ios-arrow-right"></i>
-        Last Name: Doe
+        Last Name: {{lastName}}
       </p2>
       <p2 class="item item-icon-left">
         <i class="ion-ios-arrow-right"></i>
-        Middle Name: Bread
+        Middle Name: {{middleName}}
       </p2>
     </div>
     
     <div class="list card">
       <p2 class="item item-icon-left">
         <i class="ion-ios-pricetags-outline"></i>
-        Patient # 241234
+        Patient # {{pid}}
       </p2>  
       <p2 class="item item-icon-left">
         <i class="ion-card"></i>
-        HC # 43435avs
+        HC # {{hc}}
       </p2>
     </div>
     
-    <div class="list card">
-      <p2 class="item item-icon-left">
-        <i class="ion-android-home"></i>
-       Address: 123 Wall St.
-      </p2>    
+    <div class="list card"> 
       <p2 class="item item-icon-left">
         <i class="ion-android-bus"></i>
-        City: Regina
+        City: {{city}}
       </p2>
       <p2 class="item item-icon-left">
         <i class="ion-android-globe"></i>
-        Prov: Sask
+        Prov: {{prov}}
       </p2>
     </div>
 
@@ -56,16 +52,24 @@
     <div class="list card">
       <p1 class="item item-icon-left">
         <i class="ion-android-happy"></i>
-        DOB: 21-05-91
+        DOB: {{birthdate}}
       </p1>
       <p2 class="item item-icon-left">
         <i class="ion-transgender"></i>
-        Sex: Male
+        Sex: {{sex}}
       </p2>
       <p2 class="item item-icon-left">
         <i class="ion-ios-arrow-right"></i>
-        Age: 24
+        Age: {{age}}
       </p2>
+      <p2 class="item item-icon-left">
+        <i class="ion-ios-arrow-right"></i>
+        BloodType: {{bloodtype}}
+      </p2>
+      <p2 class="item item-icon-left">
+        <i class="ion-ios-arrow-right"></i>
+        Symptom Desc: {{symptomDesc}}
+      </p2>        
     </div>
 
 

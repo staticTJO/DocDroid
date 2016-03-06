@@ -23,6 +23,7 @@ login.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state
     getLoginPromise.then(
     //On Success function
     function(data){
+        $scope.onSuccess = true;
         logindata = data.data;
     },
     
@@ -30,11 +31,12 @@ login.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state
     function(reason){
         $scope.somethingwrong = reason;
         $scope.error = true;
-        
+    if($scope.error === true){
         var Serverdown = $ionicPopup.alert({
                 title: 'Error Occured!',
                 template: 'Server Down!'
-            });
+            });     
+        }
          }
     
         );
@@ -66,12 +68,10 @@ login.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state
   }
       
       if(boolLogin === false){
-          
-          
-                var LoginFailed = $ionicPopup.alert({
-                        title: 'Login',
-                        template: 'Login Failed'
-                    });        
+        var LoginFailed = $ionicPopup.alert({
+                title: 'Login',
+                template: 'Login Failed'
+            });        
       }
 
       

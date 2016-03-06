@@ -1,100 +1,79 @@
 var dailyrounds = angular.module('dailyrounds');
 
-
-dailyrounds.controller("DailyRoundsCtrl",function($scope,$state,$stateParams){
+dailyrounds.controller("DailyRoundsCtrl", function($scope,$state,DailyRoundsService, $ionicPopup){
     
-    $scope.doctorID = $stateParams.doctorid;
+$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
     
+// Initialized Patient Id on state change
+    if(toState.name == 'main.dailyrounds') {
+        
+    $scope.onSuccess = false;
+    $scope.error = false;
+    
+    var getPatientPromise = DailyRoundsService.getPatients();
+    
+    getPatientPromise.then(
+    //On Success function
+    function(data){
+        $scope.onSuccess = true;
+        $scope.patientData = data.data;
+        $scope.patients = [];
+        
+        for(var i = 0; $scope.patientData.length; i++){
+            $scope.patients.push({patientID: $scope.patientData[i].patientID, firstName: $scope.patientData[i].firstName,
+                                 lastName: $scope.patientData[i].lastName, status: $scope.patientData[i].status});
+        }
+    },
+    
+    //On Failure function
+    function(reason){
+        $scope.somethingwrong = reason;
+        $scope.error = true;
+            if($scope.error === true){
+                    var Serverdown = $ionicPopup.alert({
+                    title: 'Error Occured!',
+                    template: 'Patients could not be loaded'
+                });     
+            }
+         }
+    
+        );      
+}
+           
 });
-
-dailyrounds.controller("patientprofileCtrl" ,function($scope, $state,$stateParams){
-   
-     
-});
-
-dailyrounds.controller("MyCtrl", function($scope,$state){
     
  $scope.shouldShowDelete = false;
  $scope.shouldShowReorder = false;
  $scope.listCanSwipe = true;
         
-    $scope.gotopatient = function(){
-    $state.go("main.patientprofile",{patientid: 0});
+    $scope.gotopatient = function(patientID){
+        var patientInfo;
+        for(var i = 0; i < $scope.patientData.length; i++){
+            if(patientID == $scope.patientData[i].patientID){
+                patientInfo = $scope.patientData[i];
+            }
+        }
+        $state.go("main.patientprofile", {patientid: patientInfo});
+        
     };
     
     $scope.data = {
-    showDelete: false
-  };
+        showDelete: false
+    };
   
   $scope.edit = function(item) {
-      
   };
     
  $scope.share = function(item) {
-   
   };
   
   $scope.moveItem = function(item, fromIndex, toIndex) {
-    $scope.items.splice(fromIndex, 1);
-    $scope.items.splice(toIndex, 0, item);
+    $scope.patients.splice(fromIndex, 1);
+    $scope.patients.splice(toIndex, 0, item);
   };
   
-  $scope.onItemDelete = function(item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
+  $scope.onItemDelete = function(patient) {
+    $scope.patients.splice($scope.patients.indexOf(patient), 1);
   };
-  
-  $scope.items = [
-    { id: 0 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 12 },
-    { id: 13 },
-    { id: 14 },
-    { id: 15 },
-    { id: 16 },
-    { id: 17 },
-    { id: 18 },
-    { id: 19 },
-    { id: 20 },
-    { id: 21 },
-    { id: 22 },
-    { id: 23 },
-    { id: 24 },
-    { id: 25 },
-    { id: 26 },
-    { id: 27 },
-    { id: 28 },
-    { id: 29 },
-    { id: 30 },
-    { id: 31 },
-    { id: 32 },
-    { id: 33 },
-    { id: 34 },
-    { id: 35 },
-    { id: 36 },
-    { id: 37 },
-    { id: 38 },
-    { id: 39 },
-    { id: 40 },
-    { id: 41 },
-    { id: 42 },
-    { id: 43 },
-    { id: 44 },
-    { id: 45 },
-    { id: 46 },
-    { id: 47 },
-    { id: 48 },
-    { id: 49 },
-    { id: 50 }
-  ];
-    
+
 });

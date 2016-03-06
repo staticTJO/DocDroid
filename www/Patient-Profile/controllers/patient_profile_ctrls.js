@@ -11,16 +11,30 @@ var patientprofile = angular.module('patientprofile');
  */
 
 patientprofile.controller("PatientCtrl",function($scope,$state,$stateParams){
-    
-    $scope.patientid = $stateParams.patientid;
-    
-    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
+
+$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
     
  /*Initialized the info state inside the patient profile state*/
     if(toState.name == 'main.patientprofile') {
-     $state.go("main.patientprofile.information");
- // Sets the Patient Profile tab as clicked during state transition
+        $state.go("main.patientprofile.information");
+        // Sets the Patient Profile tab as clicked during state transition
         $scope.var = 1;
+        
+    $scope.patientData = $stateParams.patientid;
+        
+    // Set Patient Data
+    $scope.firstName = $scope.patientData.firstName;
+    $scope.lastName = $scope.patientData.lastName;
+    $scope.middleName = $scope.patientData.middleName;
+    $scope.pid = $scope.patientData.patientID;
+    $scope.hc = $scope.patientData.HC;
+    $scope.sex = $scope.patientData.sex;
+    $scope.age = $scope.patientData.age;
+    $scope.city = $scope.patientData.city;
+    $scope.prov = $scope.patientData.prov;
+    $scope.bloodtype = $scope.patientData.bloodtype;
+    $scope.birthdate = $scope.patientData.DOB;
+    $scope.symptomDesc = $scope.patientData.symptomDesc;
     }
         
 });
@@ -50,14 +64,50 @@ patientprofile.controller("PatientCtrl",function($scope,$state,$stateParams){
         $state.go("main.patientprofile.vitals");
         $scope.var = 5;
     };
-    
-
-    
+       
 });
 
-patientprofile.controller("alergiesCtrl", function($scope){
+patientprofile.controller("alergiesCtrl", function($scope,$state,$stateParams){
+/*$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
+    
+ Initialized the info state inside the patient profile state
+    if(toState.name == 'main.patientprofile.medicalinformation') {
+        $scope.patientData = $stateParams.patientid;
+        $scope.alergies = [];
+        for(var i = 0; i < $scope.patientData.length; i++){
+        }
+    }
     
     
+   
+});*/
+    
+    $scope.alergies = [];
+for(var i = 0; i < 5; i++){
+    $scope.alergies.push({id: 0});
+}
+    
+    
+    $scope.data = {
+    showDelete: false
+  };
+  
+
+  
+  $scope.moveItem = function(item, fromIndex, toIndex) {
+    $scope.items.splice(fromIndex, 1);
+    $scope.items.splice(toIndex, 0, item);
+  };
+  
+  $scope.onItemDelete = function(item) {
+    $scope.items.splice($scope.items.indexOf(item), 1);
+  };
+    
+
+});
+
+
+patientprofile.controller("medicationCtrl",function($scope){
     $scope.data = {
     showDelete: false
   };
@@ -94,49 +144,7 @@ patientprofile.controller("alergiesCtrl", function($scope){
 
 });
 
-
-patientprofile.controller("medicationCtrl", function($scope){
-    
-    
-    $scope.data = {
-    showDelete: false
-  };
-  
-
-  
-  $scope.moveItem = function(item, fromIndex, toIndex) {
-    $scope.items.splice(fromIndex, 1);
-    $scope.items.splice(toIndex, 0, item);
-  };
-  
-  $scope.onItemDelete = function(item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
-  };
-  
-  $scope.items = [
-    { id: 0 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 12 },
-    { id: 13 },
-    { id: 14 },
-    { id: 15 }      
-  ];
-
-
-});
-
-patientprofile.controller("careteamCtrl", function($scope){
-    
-    
+patientprofile.controller("careteamCtrl", function($scope,$state,$stateParams){
     $scope.data = {
     showDelete: false
   };

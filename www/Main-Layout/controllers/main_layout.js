@@ -22,7 +22,7 @@ angular.module('mainlayout', [])
         
        $stateProvider
         .state('main.patientprofile', {
-          url: '/patientprofile/:patientid',
+          url: '/patientprofile/{patientid:json}',
           templateUrl: './Patient-Profile/templates/patient_profile.html',
         });
 

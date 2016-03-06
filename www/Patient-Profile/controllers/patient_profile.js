@@ -6,13 +6,13 @@ angular.module('patientprofile', ['ionic'])
         
        $stateProvider
         .state('main.patientprofile.information', {
-          url: '/patientprofile/patientinformation',
+          url: '/patientprofile/patientinformation/',
           templateUrl: './Patient-Profile/templates/patient_information.html',
         });
     
         $stateProvider
         .state('main.patientprofile.medicalinformation', {
-          url: '/patientprofile/patientinformation/medicalinfo',
+          url: '/patientprofile/patientinformation/medicalinfo/',
           templateUrl: './Patient-Profile/templates/patient_medical_information.html',
         });
     
