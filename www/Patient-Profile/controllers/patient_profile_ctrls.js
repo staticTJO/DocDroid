@@ -67,118 +67,151 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
        
 });
 
-patientprofile.controller("alergiesCtrl", function($scope,$state,$stateParams){
-/*$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
+patientprofile.controller("alergiesCtrl", function($scope,$state,$stateParams,$ionicPopup,PatientProfileService){
+
+    $scope.patientData = $stateParams.patientid;
+    $scope.patientID = $scope.patientData.patientID;
     
- Initialized the info state inside the patient profile state
-    if(toState.name == 'main.patientprofile.medicalinformation') {
-        $scope.patientData = $stateParams.patientid;
+    $scope.onSuccess = false;
+    $scope.error = false;
+    
+    var Alergydata;
+    
+    var getAlergyPromise = PatientProfileService.getAlergyPromise();
+    
+    getAlergyPromise.then(
+    //On Success function
+    function(data){
+        $scope.onSuccess = true;
+        $scope.Alergydata = data.data;
         $scope.alergies = [];
-        for(var i = 0; i < $scope.patientData.length; i++){
+    for(var i = 0; i < $scope.Alergydata.length; i++){
+            if( $scope.patientID == $scope.Alergydata[i].patient.patientID){
+            $scope.alergies.push({alergy: $scope.Alergydata[i].allergy});
+            }
         }
-    }
+        
+    },
     
+    //On Failure function
+        function(reason){
+        $scope.somethingwrong = reason;
+        $scope.error = true;
+    if($scope.error === true){
+            var Serverdown = $ionicPopup.alert({
+                title: 'Error Occured!',
+                template: 'Could not load patient Alergies!'
+                });     
+            }
+        }
     
-   
-});*/
-    
-    $scope.alergies = [];
-for(var i = 0; i < 5; i++){
-    $scope.alergies.push({id: 0});
-}
-    
+    );
     
     $scope.data = {
     showDelete: false
   };
   
+});
 
-  
-  $scope.moveItem = function(item, fromIndex, toIndex) {
-    $scope.items.splice(fromIndex, 1);
-    $scope.items.splice(toIndex, 0, item);
-  };
-  
-  $scope.onItemDelete = function(item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
-  };
+
+patientprofile.controller("medicationCtrl",function($scope,$state,$stateParams,$ionicPopup,PatientProfileService){
+
+    $scope.patientData = $stateParams.patientid;
+    $scope.patientID = $scope.patientData.patientID;
     
+    $scope.onSuccess = false;
+    $scope.error = false;
+    
+    var Medicationdata;
+    
+    var getMedicationPromise = PatientProfileService. getMedicationPromise();
+    
+   getMedicationPromise.then(
+    //On Success function
+    function(data){
+        $scope.onSuccess = true;
+        $scope.Medicationdata = data.data;
+        $scope.medications = [];
+    for(var i = 0; i < $scope.Medicationdata.length; i++){
+            if( $scope.patientID == $scope.Medicationdata[i].patient.patientID){
+            $scope.medications.push({medication: $scope.Medicationdata[i].medication});
+            }
+        }
+        
+    },
+    
+    //On Failure function
+        function(reason){
+        $scope.somethingwrong = reason;
+        $scope.error = true;
+    if($scope.error === true){
+            var Serverdown = $ionicPopup.alert({
+                title: 'Error Occured!',
+                template: 'Could not load patient medications!'
+                });     
+            }
+        }
+    
+    );
+    
+    $scope.data = {
+    showDelete: false
+  };
+
+});
+
+patientprofile.controller("careteamCtrl", function($scope,$state,$stateParams,PatientProfileService,$ionicPopup){
+    
+    $scope.patientData = $stateParams.patientid;
+    $scope.patientID = $scope.patientData.patientID;
+    
+    $scope.onSuccess = false;
+    $scope.error = false;
+    
+    var Careteamdata;
+    
+    var getCareteamPromise = PatientProfileService.getCareteamPromise();
+    
+    getCareteamPromise.then(
+    //On Success function
+    function(data){
+        $scope.onSuccess = true;
+        $scope.Careteamdata = data.data;
+        $scope.careteams = [];
+    for(var i = 0; i < $scope.Careteamdata.length; i++){
+            $scope.careteams.push({doctorID: $scope.Careteamdata[i].doctorID,
+                                 lastName:$scope.Careteamdata[i].lastName,
+                                 firstName:$scope.Careteamdata[i].firstName,
+                                 specialty:$scope.Careteamdata[i].specialty});
+        }
+        
+    },
+    
+    //On Failure function
+        function(reason){
+        $scope.somethingwrong = reason;
+        $scope.error = true;
+    if($scope.error === true){
+            var Serverdown = $ionicPopup.alert({
+                title: 'Error Occured!',
+                template: 'Could not load patient careteam!'
+                });     
+            }
+        }
+    
+    );
+    
+    $scope.data = {
+    showDelete: false
+  };
+
 
 });
 
 
-patientprofile.controller("medicationCtrl",function($scope){
-    $scope.data = {
-    showDelete: false
-  };
-  
-
-  
-  $scope.moveItem = function(item, fromIndex, toIndex) {
-    $scope.items.splice(fromIndex, 1);
-    $scope.items.splice(toIndex, 0, item);
-  };
-  
-  $scope.onItemDelete = function(item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
-  };
-  
-  $scope.items = [
-    { id: 0 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 12 },
-    { id: 13 },
-    { id: 14 },
-    { id: 15 }      
-  ];
-
-
-});
-
-patientprofile.controller("careteamCtrl", function($scope,$state,$stateParams){
-    $scope.data = {
-    showDelete: false
-  };
-  
-
-  
-  $scope.moveItem = function(item, fromIndex, toIndex) {
-    $scope.items.splice(fromIndex, 1);
-    $scope.items.splice(toIndex, 0, item);
-  };
-  
-  $scope.onItemDelete = function(item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
-  };
-  
-  $scope.items = [
-    { id: 0 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 12 },
-    { id: 13 },
-    { id: 14 },
-    { id: 15 }      
-  ];
-
-
+patientprofile.controller("diagnosisCtrl", function($scope,$state,$stateParams,PatientProfileService,$ionicPopup){
+    
+    
 });
 
 

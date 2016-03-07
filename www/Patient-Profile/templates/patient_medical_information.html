@@ -12,7 +12,7 @@
       <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
         <ion-item ng-repeat="alergy in alergies" 
                   item="alergy" class="item-remove-animate">
-         Alergy {{ alergy.id}}
+         {{ alergy.alergy}}
 
         </ion-item>
 
@@ -24,10 +24,6 @@
 </div>
     
     
-    
-    
-    
-
 <!--Right Pane Area-->
 <div class="col col-50" ng-controller="medicationCtrl" style="position:relative; margin-bottom:100px">
 
@@ -39,9 +35,9 @@
         
     <ion-content >
       <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-        <ion-item ng-repeat="item in items" 
-                  item="item" class="item-remove-animate">
-          Item {{ item.id }}
+        <ion-item ng-repeat="medication in medications" 
+                  item="medication" class="item-remove-animate">
+          {{ medication.medication }}
 
         </ion-item>
 

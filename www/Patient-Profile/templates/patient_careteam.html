@@ -7,9 +7,14 @@
         
     <ion-content style="margin-bottom:100px">
       <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-        <ion-item ng-repeat="item in items" 
-                  item="item" class="item-remove-animate">
-          Item {{ item.id }}
+        <ion-item ng-repeat="careteam in careteams" 
+                  item="careteam" class="item-remove-animate">
+         DoctorID: {{ careteam.doctorID }}
+        <div></div>
+         Dr. {{careteam.lastName}},
+         {{careteam.firstName}}
+        <div></div>
+         Specialty: {{careteam.specialty}}
 
         </ion-item>
 
