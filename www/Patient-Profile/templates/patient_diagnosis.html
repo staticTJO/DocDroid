@@ -9,12 +9,27 @@
     <ion-header-bar class="bar-assertive">
       <h1 class="title"></h1>
 <div class="buttons">
-    <button class="button" ng-click="addDiagnosis()">Add</button>
+    <button class="button" ng-click="addDiagnosis()">Add Diagnosis</button>
   </div>
     </ion-header-bar>
     <ion-content ng-controller="diagnosisCtrl">
-      <ion-list>
-      </ion-list>
+      
+    <ion-list>
+        <ion-item ng-repeat="item in items" 
+                  item="item"
+                  class="item-remove-animate">
+<div class="item item-button-right">
+                Appears to have lumps on side of the neck
+                <div class="buttons">
+                    <button class="button button-assertive">
+                        <i class="ion-close-circled"></i>
+                    </button>
+                </div>
+            </div>
+              
+        </ion-item>    
+  
+    </ion-list>
     </ion-content>
  </ion-pane>
 
