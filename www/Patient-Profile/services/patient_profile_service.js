@@ -64,7 +64,11 @@ PatientProfileMethods = {
         });
         
         return defer.promise;
-    }    
+    },
+    
+    addDiagnosis: function(diagnosis){
+
+    }
       
 };
     return PatientProfileMethods;
