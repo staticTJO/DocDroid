@@ -209,18 +209,52 @@ patientprofile.controller("careteamCtrl", function($scope,$state,$stateParams,Pa
 });
 
 
-patientprofile.controller("diagnosisCtrl", function($scope,$state,$stateParams,PatientProfileService,$ionicPopup){
+patientprofile.controller("diagnosisCtrl", function($scope,$state,$stateParams,PatientProfileService,$ionicPopup, $timeout){
     
-  $scope.data = {
+$scope.patientDiagnosis = [];
+$scope.addItem = function(){
+};
+    
+$scope.addDiagnosis = function() {
+   $scope.diagnosisdata = {};
+
+   // An elaborate, custom popup
+   var myPopup = $ionicPopup.show({
+     template: '<input type="text" ng-model="diagnosisdata.diagnosis">',
+     title: 'Enter a diagnosis',
+     subTitle: '',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel' },
+       {
+         text: '<b>Save</b>',
+         type: 'button-positive',
+         onTap: function(e) {
+           if (!$scope.diagnosisdata.diagnosis) {
+             e.preventDefault();
+           } else {
+             return $scope.diagnosisdata.diagnosis;
+           }
+         }
+       },
+     ]
+   });
+   myPopup.then(function(res) {
+       $scope.resdiagnosis = res;
+       $scope.patientDiagnosis.push({test:$scope.resdiagnosis});
+   });
+    
+};
+    
+    
+    
+
+
+    
+$scope.data = {
     showDelete: false
   };
   
-  $scope.edit = function(item) {
-  
-  };
-  $scope.share = function(item) {
-
-  };
   
   $scope.moveItem = function(item, fromIndex, toIndex) {
     $scope.items.splice(fromIndex, 1);
@@ -230,60 +264,7 @@ patientprofile.controller("diagnosisCtrl", function($scope,$state,$stateParams,P
   $scope.onItemDelete = function(item) {
     $scope.items.splice($scope.items.indexOf(item), 1);
   };
-  
-  $scope.items = [
-    { id: 0 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 12 },
-    { id: 13 },
-    { id: 14 },
-    { id: 15 },
-    { id: 16 },
-    { id: 17 },
-    { id: 18 },
-    { id: 19 },
-    { id: 20 },
-    { id: 21 },
-    { id: 22 },
-    { id: 23 },
-    { id: 24 },
-    { id: 25 },
-    { id: 26 },
-    { id: 27 },
-    { id: 28 },
-    { id: 29 },
-    { id: 30 },
-    { id: 31 },
-    { id: 32 },
-    { id: 33 },
-    { id: 34 },
-    { id: 35 },
-    { id: 36 },
-    { id: 37 },
-    { id: 38 },
-    { id: 39 },
-    { id: 40 },
-    { id: 41 },
-    { id: 42 },
-    { id: 43 },
-    { id: 44 },
-    { id: 45 },
-    { id: 46 },
-    { id: 47 },
-    { id: 48 },
-    { id: 49 },
-    { id: 50 }
-  ];    
+      
     
 });
 

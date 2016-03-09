@@ -5,21 +5,20 @@
 </div>
 -->
 
-<ion-pane>
+<ion-pane ng-controller="diagnosisCtrl">
     <ion-header-bar class="bar-assertive">
       <h1 class="title"></h1>
 <div class="buttons">
     <button class="button" ng-click="addDiagnosis()">Add Diagnosis</button>
   </div>
     </ion-header-bar>
-    <ion-content ng-controller="diagnosisCtrl">
-      
+    <ion-content>
     <ion-list>
-        <ion-item ng-repeat="item in items" 
-                  item="item"
+        <ion-item ng-repeat="diagnosis in patientDiagnosis" 
+                  item="diagnosis"
                   class="item-remove-animate">
 <div class="item item-button-right">
-                Appears to have lumps on side of the neck
+                {{diagnosis.test}}
                 <div class="buttons">
                     <button class="button button-assertive">
                         <i class="ion-close-circled"></i>
