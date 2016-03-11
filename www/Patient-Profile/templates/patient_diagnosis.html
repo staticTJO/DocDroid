@@ -13,19 +13,17 @@
   </div>
     </ion-header-bar>
     <ion-content>
+        {{test}}
     <ion-list>
         <ion-item ng-repeat="diagnosis in patientDiagnosis" 
                   item="diagnosis"
                   class="item-remove-animate">
-<<<<<<< HEAD
             <div class="item item-button-right">
-                Appears to have lumps on side of the neck
-=======
-<div class="item item-button-right">
-                {{diagnosis.test}}
->>>>>>> 3fb1293c88f653f6a5ab9b0a181b3d46b53fe6e8
+
+                {{diagnosis.CareteamId}}
+                {{diagnosis.Diagnosis}}
                 <div class="buttons">
-                    <button class="button button-assertive">
+                    <button class="button button-assertive" ng-click="removeDiagnosis(diagnosis)">
                         <i class="ion-close-circled"></i>
                     </button>
                 </div>

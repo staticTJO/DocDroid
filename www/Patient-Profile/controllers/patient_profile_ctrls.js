@@ -209,14 +209,52 @@ patientprofile.controller("careteamCtrl", function($scope,$state,$stateParams,Pa
 });
 
 
-patientprofile.controller("diagnosisCtrl", function($scope,$state,$stateParams,PatientProfileService,$ionicPopup, $timeout){
+patientprofile.controller("diagnosisCtrl", function($scope,$state,$stateParams,$ionicPopup,$timeout,PatientDiagnosisService){
     
 $scope.patientDiagnosis = [];
-$scope.addItem = function(){
-};
     
+$scope.patientData = $stateParams.patientid;
+$scope.patientID = $scope.patientData.patientID;
+    
+    $scope.onSuccess = false;
+    $scope.error = false;
+    
+    var Diagnosisdata;
+    
+    var getPatientDiagnosisPromise = PatientDiagnosisService.getPatientDiagnosisPromise();
+    
+   getPatientDiagnosisPromise.then(
+    //On Success function
+    function(data){
+        $scope.onSuccess = true;
+        $scope.Diagnosisdata = data.data;
+    for(var i = 0; i < $scope.Diagnosisdata.length; i++){
+          if( $scope.patientID == $scope.Diagnosisdata[i].patient.patientID){
+            $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[i].id, Diagnosis: $scope.Diagnosisdata[i].diagnosis});
+            }
+        }
+        
+    },
+    
+    //On Failure function
+        function(reason){
+        $scope.somethingwrong = reason;
+        $scope.error = true;
+    if($scope.error === true){
+            var Serverdown = $ionicPopup.alert({
+                title: 'Error Occured!',
+                template: 'Could not load patient diagnosises!'
+                });     
+            }
+        }
+    
+    );    
+      
 $scope.addDiagnosis = function() {
-   $scope.diagnosisdata = {};
+    $scope.doctorid = $stateParams.doctorid;
+    $scope.patientData = $stateParams.patientid;
+    $scope.patientid = $scope.patientData.patientID;
+    $scope.diagnosisdata = {};
 
    // An elaborate, custom popup
    var myPopup = $ionicPopup.show({
@@ -241,14 +279,44 @@ $scope.addDiagnosis = function() {
    });
    myPopup.then(function(res) {
        $scope.resdiagnosis = res;
-       $scope.patientDiagnosis.push({test:$scope.resdiagnosis});
+       if($scope.resdiagnosis.length !== 0){
+       $scope.patientDiagnosis.push({test:$scope.resdiagnosis});   
+       }
    });
+    
+};
+
+$scope.removeDiagnosis = function(diagnosis) {
+
+    var deletePatientDiagnosisPromise = PatientDiagnosisService.deletePatientDiagnosisPromise(diagnosis.CareteamId);
+    
+   deletePatientDiagnosisPromise.then(
+    //On Success function
+    function(data){
+        $scope.onSuccess = true;
+        $scope.Deletedata = data.data;
+        $scope.patientDiagnosis.splice($scope.patientDiagnosis.indexOf(diagnosis), 1);
+    },
+    
+    //On Failure function
+        function(reason){
+        $scope.somethingwrong = reason;
+        $scope.error = true;
+    if($scope.error === true){
+            var Serverdown = $ionicPopup.alert({
+                title: 'Error Occured!',
+                template: 'Could not delete patient diagnosis!'
+                });     
+            }
+        }
+    
+    );  
     
 };
     
     
-    
-
+/*{"diagnosis":"FBI","doctor":{"id":1,"version":0},"patient":{"id":3,"version":0}}*/
+    /*"ExampleJson"*/
 
     
 $scope.data = {
@@ -256,14 +324,6 @@ $scope.data = {
   };
   
   
-  $scope.moveItem = function(item, fromIndex, toIndex) {
-    $scope.items.splice(fromIndex, 1);
-    $scope.items.splice(toIndex, 0, item);
-  };
-  
-  $scope.onItemDelete = function(item) {
-    $scope.items.splice($scope.items.indexOf(item), 1);
-  };
       
     
 });
