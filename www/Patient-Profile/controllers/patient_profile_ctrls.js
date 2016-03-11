@@ -279,9 +279,61 @@ $scope.addDiagnosis = function() {
    });
    myPopup.then(function(res) {
        $scope.resdiagnosis = res;
+       
        if($scope.resdiagnosis.length !== 0){
-       $scope.patientDiagnosis.push({test:$scope.resdiagnosis});   
-       }
+           
+        var patientdata = {
+          id: $scope.patientid,
+          version: "0"
+        };
+            
+        var doctordata = {
+          id: $scope.doctorid,
+          version: "0"
+        };
+            
+        var diagnosisObj = {
+				diagnosis : $scope.resdiagnosis,
+				doctor : doctordata,
+				patient : patientdata
+		};
+           
+    PatientDiagnosisService.addPatientDiagnosisPromise(diagnosisObj);
+           
+    $scope.onSuccess = false;
+    $scope.error = false;
+    
+        var Diagnosisdata;
+
+        var getPatientDiagnosisPromise = PatientDiagnosisService.getPatientDiagnosisPromise();
+
+       getPatientDiagnosisPromise.then(
+        //On Success function
+        function(data){
+            $scope.onSuccess = true;
+            $scope.Diagnosisdata = data.data;
+        for(var i = 0; i < $scope.Diagnosisdata.length; i++){
+              if( $scope.patientID == $scope.Diagnosisdata[i].patient.patientID){
+                $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[i].id, Diagnosis: $scope.Diagnosisdata[i].diagnosis});
+                }
+            }
+
+        },
+
+        //On Failure function
+            function(reason){
+            $scope.somethingwrong = reason;
+            $scope.error = true;
+        if($scope.error === true){
+                var Serverdown = $ionicPopup.alert({
+                    title: 'Error Occured!',
+                    template: 'Could not load patient diagnosises!'
+                    });     
+                }
+            }
+
+        ); 
+      }
    });
     
 };
