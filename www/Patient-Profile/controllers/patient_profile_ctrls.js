@@ -365,18 +365,10 @@ $scope.removeDiagnosis = function(diagnosis) {
     );  
     
 };
-    
-    
-/*{"diagnosis":"FBI","doctor":{"id":1,"version":0},"patient":{"id":3,"version":0}}*/
-    /*"ExampleJson"*/
-
-    
+      
 $scope.data = {
     showDelete: false
   };
-  
-  
-      
     
 });
 

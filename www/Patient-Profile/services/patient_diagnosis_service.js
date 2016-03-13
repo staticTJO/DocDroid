@@ -26,9 +26,9 @@ PatientDiagnosisMethods = {
         return defer.promise;
     },
     
-    deletePatientDiagnosisPromise: function(careteamid){
-        var CareteamID = careteamid;
-        var promise = $http.delete('http://localhost:8080/Medroid/doctordiagnoses/' + CareteamID),
+    deletePatientDiagnosisPromise: function(diagnosisid){
+        var DiagnosisID = diagnosisid;
+        var promise = $http.delete('http://localhost:8080/Medroid/doctordiagnoses/' + DiagnosisID),
         defer = defer || $q.defer();
         
         promise.then(

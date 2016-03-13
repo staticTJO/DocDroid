@@ -27,9 +27,28 @@ var DailyRoundsMethods = {
         });
         
         return defer.promise;
-    }
+    },
     
-      
+   dischargePatientPromise: function(careteamid){
+        var careteamID = careteamid;
+        var promise = $http.delete('http://localhost:8080/Medroid/careteams/' + careteamID),
+        defer = defer || $q.defer();
+        
+        promise.then(
+        
+        //On Success
+        function(data){
+            defer.resolve(data);
+        },
+        
+        //On Failure
+        function(data){
+            defer.reject(data);    
+        });
+        
+        return defer.promise;
+    },
+    
 };
     return DailyRoundsMethods;
         
