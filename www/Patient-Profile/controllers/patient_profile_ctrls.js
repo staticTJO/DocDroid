@@ -392,15 +392,12 @@ PatientDiagnosisService.addPatientDiagnosisPromise($scope.diagnosisObj);
         function(data){
             $scope.onSuccess = true;
             $scope.Diagnosisdata = data.data;
-            if($scope.Diagnosisdata.length !== 0){
-        for(var i = $scope.Diagnosisdata.length-1; i < $scope.Diagnosisdata.length; i++){
-              if($scope.patientID == $scope.Diagnosisdata[i].patient.patientID){
-                $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[i].id, Diagnosis: $scope.Diagnosisdata[i].diagnosis});
-                }
-            }
-                
+            if($scope.Diagnosisdata.length === 1){
+            $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[0].id, Diagnosis: $scope.Diagnosisdata[0].diagnosis});
             }else{
-                $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[0].id, Diagnosis: $scope.Diagnosisdata[0].diagnosis});
+            for(var i = $scope.Diagnosisdata.length-1; $scope.Diagnosisdata.length; i++){
+            $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[i].id, Diagnosis: $scope.Diagnosisdata[i].diagnosis});
+            }
             }
 
         },
