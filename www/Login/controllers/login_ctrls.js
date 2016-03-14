@@ -54,7 +54,8 @@ login.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state
           
         if(form.$valid && $scope.authorization.username == logindata[i].username  && $scope.authorization.password ==     
            logindata[i].password) {
-                $state.go("main",{doctorid: logindata[i].id});
+                var doctorInfo =  logindata[i].doctor;
+                $state.go("main",{doctorid: doctorInfo});
                 boolLogin = true;
                 break;
                 }

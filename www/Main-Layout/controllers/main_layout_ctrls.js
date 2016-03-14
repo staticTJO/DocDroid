@@ -10,23 +10,48 @@ var mainlayout = angular.module('mainlayout');
  * 
  */
 
-mainlayout.controller("MenuCtrl",function($scope,$ionicSideMenuDelegate,$ionicHistory){
-
-    
+mainlayout.controller("MenuCtrl",function($scope,$ionicSideMenuDelegate,$ionicHistory,MainService,$stateParams,$ionicPopup){
+  
     /*Initialize Status, this will be stored in database later on*/
-        $scope.docstatus = "Available";
-        $scope.statuscolor = "icon-available";
-        $scope.openDrawer = function (){
-        $ionicSideMenuDelegate.toggleLeft(); 
-    };
     
-        $scope.closeDrawer = function (){
-        $ionicSideMenuDelegate.toggleLeft();   
-    };
+    // Need to get most updated version of record before passing it to update function.
     
+    var getDoctorStatus = MainService.GetStatusPromise();
+    
+    getDoctorStatus.then(
+        //On Success function
+        function(data){
+            $scope.onSuccess = true;
+            $scope.statusData = data.data;
+            $scope.statusID = $scope.statusData.status.id;
+            $scope.docstatus = $scope.statusData.status.status;
+            if($scope.docstatus == "Available"){
+                $scope.statuscolor = "icon-available"; 
+            }
+            else if($scope.docstatus == "Away"){
+                $scope.statuscolor = "icon-away"; 
+            }    
+            else if($scope.docstatus == "Busy"){
+                $scope.statuscolor = "icon-busy"; 
+            }
+
+        },
+
+        //On Failure function
+            function(reason){
+            $scope.somethingwrong = reason;
+            $scope.error = true;
+        if($scope.error === true){
+                var Serverdown = $ionicPopup.alert({
+                    title: 'Error Occured!',
+                    template: 'Could not load doctor status!'
+                    });     
+                }
+            }
+
+        ); 
     
     $scope.changeStatus = function(){
-    
         
         if($scope.docstatus.valueOf() == "Available"){
             $scope.docstatus = "Away";
@@ -40,7 +65,68 @@ mainlayout.controller("MenuCtrl",function($scope,$ionicSideMenuDelegate,$ionicHi
             $scope.docstatus ="Available";
             $scope.statuscolor ="icon-available";
         }
+        
+        //Get Current Version of Status
+        
+            
+    var getCurrentVersion = MainService.GetStatusPromise();
+    
+    getCurrentVersion.then(
+        //On Success function
+        function(data){
+            $scope.onSuccess = true;
+            $scope.versionData = data.data;
+            $scope.CurrentVersion = $scope.versionData.status.version;
+            
+            var statusObject = {docstatus:$scope.docstatus, version: $scope.CurrentVersion, statusid:$scope.statusID};
+            var UpdateStatusPromise = MainService.UpdateStatusPromise(statusObject);
+        
+        UpdateStatusPromise.then(
+            //On Success function
+            function(data){
+                $scope.onSuccess = true;
+                $scope.promiseData = data.data;
+            },
+
+            //On Failure function
+                function(reason){
+                $scope.somethingwrong = reason;
+                $scope.error = true;
+            if($scope.error === true){
+                    var Serverdown = $ionicPopup.alert({
+                        title: 'Error Occured!',
+                        template: 'Could not update doctor status!'
+                        });     
+                    }
+                }
+
+            ); 
+        },
+
+        //On Failure function
+            function(reason){
+            $scope.somethingwrong = reason;
+            $scope.error = true;
+        if($scope.error === true){
+                var Serverdown = $ionicPopup.alert({
+                    title: 'Error Occured!',
+                    template: 'Could not get current version of doctor status!'
+                    });     
+                }
+            }
+
+        ); 
+        
     };
+    
+        $scope.openDrawer = function (){
+        $ionicSideMenuDelegate.toggleLeft(); 
+    };
+    
+        $scope.closeDrawer = function (){
+        $ionicSideMenuDelegate.toggleLeft();   
+    };
+    
 });
 
 

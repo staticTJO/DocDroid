@@ -1,17 +1,18 @@
 var dailyrounds = angular.module('dailyrounds');
 
-dailyrounds.controller("DailyRoundsCtrl", function($scope,$state,DailyRoundsService, $ionicPopup){
+dailyrounds.controller("DailyRoundsCtrl", function($scope,$state,DailyRoundsService, $ionicPopup,$stateParams){
     
 $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
     
 // Initialized Patient Id on state change
     if(toState.name == 'main.dailyrounds') {
-        
+         
     $scope.onSuccess = false;
     $scope.error = false;
     
     var getPatientPromise = DailyRoundsService.getPatients();
-    
+    var getPatientStatus = DailyRoundsService.getPatientStatus();
+        
     getPatientPromise.then(
     //On Success function
     function(data){
@@ -19,12 +20,17 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
         $scope.careteamData = data.data;
         $scope.patients = [];
         
-        for(var i = 0; $scope.careteamData.length; i++){
-            $scope.patients.push({careteamID: $scope.careteamData[i].id, patientID: $scope.careteamData[i].patient.id,        
-                                  firstName:$scope.careteamData[i].patient.firstName,
-                                  lastName: $scope.careteamData[i].patient.lastName, 
-                                  status: $scope.careteamData[i].patient.status});
+        for(var i = 0; $scope.careteamData.length;i++){
+                $scope.patients.push({
+                careteamID: $scope.careteamData[i].id,
+                patientID:$scope.careteamData[i].patient.id,       
+                firstName:$scope.careteamData[i].patient.firstName,
+                lastName: $scope.careteamData[i].patient.lastName,
+                status: $scope.careteamData[i].patient.status.status});
         }
+                                     
+        
+        
     },
     
     //On Failure function

@@ -10,7 +10,7 @@ var patientprofile = angular.module('patientprofile');
  * 
  */
 
-patientprofile.controller("PatientCtrl",function($scope,$state,$stateParams){
+patientprofile.controller("PatientCtrl",function($scope,$state,$stateParams,PatientProfileService,$ionicPopup){
 
 $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
     
@@ -35,6 +35,8 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
     $scope.bloodtype = $scope.patientData.bloodtype;
     $scope.birthdate = $scope.patientData.DOB;
     $scope.symptomDesc = $scope.patientData.symptomDesc;
+    $scope.estimatedDischargeDate = $scope.patientData.estimatedDischargeDate.estimatedDischargeDate;
+    $scope.dischargeID = $scope.patientData.estimatedDischargeDate.id;
     }
         
 });
@@ -64,6 +66,83 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
         $state.go("main.patientprofile.vitals");
         $scope.var = 5;
     };
+    
+    
+$scope._discharge = $scope.estimatedDischargeDate;
+    
+    $scope.discharge= {
+        date: function(newDischarge){
+            return arguments.length ? ($scope._discharge = newDischarge) : $scope._discharge;
+        }
+    };
+
+    
+    $scope.UpdatePatientDischargeDate = function(){
+
+    var getCurrentVersion = PatientProfileService.GetDischargePromise();
+    
+    getCurrentVersion.then(
+        //On Success function
+        function(data){
+            $scope.onSuccess = true;
+            $scope.dischargeVersionData = data.data;
+            $scope.DischargeVersion =  $scope.dischargeVersionData[0].version;
+            
+            
+            
+        $scope.dischargeData = {estimatedDischargeDate: $scope.discharge.date(),
+                             id: $scope.dischargeID, patientID: $scope.pid,
+                             version: $scope.DischargeVersion};
+       var UpdateDischargePromise = PatientProfileService.UpdateDischargePromise($scope.dischargeData);
+        
+        UpdateDischargePromise.then(
+            //On Success function
+            function(data){
+                $scope.onSuccess = true;
+                $scope.DischargePromiseData = data.data;
+                if($scope.onSuccess === true){
+                    var Serverdown = $ionicPopup.alert({
+                        title: 'Patient Discharge!',
+                        template: 'Discharge Updated!'
+                        });     
+                    }
+            },
+
+            //On Failure function
+                function(reason){
+                $scope.somethingwrong = reason;
+                $scope.error = true;
+            if($scope.error === true){
+                    var Serverdown = $ionicPopup.alert({
+                        title: 'Error Occured!',
+                        template: 'Could not update Patient discharge!'
+                        });     
+                    }
+                }
+
+            );
+            
+        },
+
+        //On Failure function
+            function(reason){
+            $scope.somethingwrong = reason;
+            $scope.error = true;
+        if($scope.error === true){
+                var Serverdown = $ionicPopup.alert({
+                    title: 'Error Occured!',
+                    template: 'Could not get current version of patient discharge date!'
+                    });     
+                }
+            }
+
+        ); 
+    };
+    
+    
+    
+    
+    
        
 });
 
@@ -251,7 +330,8 @@ $scope.patientID = $scope.patientData.patientID;
     );    
       
 $scope.addDiagnosis = function() {
-    $scope.doctorid = $stateParams.doctorid;
+    $scope.doctorData = $stateParams.doctorid;
+    $scope.doctorid =$scope.doctorData.doctorID;
     $scope.patientData = $stateParams.patientid;
     $scope.patientid = $scope.patientData.patientID;
     $scope.diagnosisdata = {};
@@ -292,13 +372,13 @@ $scope.addDiagnosis = function() {
           version: "0"
         };
             
-        var diagnosisObj = {
+        $scope.diagnosisObj = {
 				diagnosis : $scope.resdiagnosis,
 				doctor : doctordata,
 				patient : patientdata
 		};
            
-    PatientDiagnosisService.addPatientDiagnosisPromise(diagnosisObj);
+PatientDiagnosisService.addPatientDiagnosisPromise($scope.diagnosisObj);
            
     $scope.onSuccess = false;
     $scope.error = false;
@@ -312,10 +392,15 @@ $scope.addDiagnosis = function() {
         function(data){
             $scope.onSuccess = true;
             $scope.Diagnosisdata = data.data;
-        for(var i = 0; i < $scope.Diagnosisdata.length; i++){
-              if( $scope.patientID == $scope.Diagnosisdata[i].patient.patientID){
+            if($scope.Diagnosisdata.length !== 0){
+        for(var i = $scope.Diagnosisdata.length-1; i < $scope.Diagnosisdata.length; i++){
+              if($scope.patientID == $scope.Diagnosisdata[i].patient.patientID){
                 $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[i].id, Diagnosis: $scope.Diagnosisdata[i].diagnosis});
                 }
+            }
+                
+            }else{
+                $scope.patientDiagnosis.push({CareteamId: $scope.Diagnosisdata[0].id, Diagnosis: $scope.Diagnosisdata[0].diagnosis});
             }
 
         },

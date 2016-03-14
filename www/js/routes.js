@@ -36,7 +36,7 @@ angular.module('docdroid')
     
       $stateProvider
         .state('main', {
-          url: '/main/:doctorid',
+          url: '/main/{doctorid:json}',
           templateUrl: './Main-Layout/templates/main_layout.html',
         });
 

@@ -69,7 +69,15 @@
       <p2 class="item item-icon-left">
         <i class="ion-ios-arrow-right"></i>
         Symptom Desc: {{symptomDesc}}
-      </p2>        
+ </p2>
+
+    <form name="dischargeForm" ng-submit="UpdatePatientDischargeDate()">
+        <label class="item item-input item-stacked-label"> <i class="ion-ios-arrow-right"></i> Estimated Discharge:
+            <input type="text" name="dischargedate" ng-model="discharge.date" ng-model-options="{ getterSetter: true }" >
+        </label>
+        <input class="button button-block button-assertive" type= "submit" value="Set Discharge">
+    </form>
+    
     </div>
 
 
