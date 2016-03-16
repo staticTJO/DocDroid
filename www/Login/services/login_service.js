@@ -6,7 +6,7 @@ var defer,
 LoginMethods = {
     getLoginPromise: function(){
         
-        var promise = $http.get('http://localhost:8080/Medroid/loguserdoctors'),
+        var promise = $http.get('http://69.11.16.153/Medroid/loguserdoctors'),
         defer = defer || $q.defer();
         
         promise.then(

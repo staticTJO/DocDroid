@@ -18,7 +18,7 @@ mainMethods = {
                          version:statusObject.version};
         
         
-        var promise = $http.put('http://localhost:8080/Medroid/doctorstatuses/'+ statusid, doctorData),
+        var promise = $http.put('http://69.11.16.153/Medroid/doctorstatuses/'+ statusid, doctorData),
         defer = defer || $q.defer();
     
         promise.then(
@@ -41,7 +41,7 @@ mainMethods = {
         var doctorid = doctorinfo.doctorID;
     
         
-        var promise = $http.get('http://localhost:8080/Medroid/doctors/'+ doctorid),
+        var promise = $http.get('http://69.11.16.153/Medroid/doctors/'+ doctorid),
         defer = defer || $q.defer();
     
         promise.then(

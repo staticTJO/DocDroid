@@ -8,7 +8,7 @@ PatientDiagnosisMethods = {
     var patientData = $stateParams.patientid;
     var patientID = patientData.patientID;
         
-        var promise = $http.get('http://localhost:8080/Medroid/jsonpatientdiagnosis/GetDiagnosisPatientID/' + patientID),
+        var promise = $http.get('http://69.11.16.153/Medroid/jsonpatientdiagnosis/GetDiagnosisPatientID/' + patientID),
         defer = defer || $q.defer();
         
         promise.then(
@@ -28,7 +28,7 @@ PatientDiagnosisMethods = {
     
     deletePatientDiagnosisPromise: function(diagnosisid){
         var DiagnosisID = diagnosisid;
-        var promise = $http.delete('http://localhost:8080/Medroid/doctordiagnoses/' + DiagnosisID),
+        var promise = $http.delete('http://69.11.16.153/Medroid/doctordiagnoses/' + DiagnosisID),
         defer = defer || $q.defer();
         
         promise.then(
@@ -47,7 +47,7 @@ PatientDiagnosisMethods = {
     },
     
     addPatientDiagnosisPromise: function(diagnosisData){
-        var promise = $http.post('http://localhost:8080/Medroid/doctordiagnoses',diagnosisData),
+        var promise = $http.post('http://69.11.16.153/Medroid/doctordiagnoses',diagnosisData),
         defer = defer || $q.defer();
         
         promise.then(

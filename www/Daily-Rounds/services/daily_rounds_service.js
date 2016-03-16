@@ -11,7 +11,7 @@ var DailyRoundsMethods = {
     getPatients: function(){
     var doctorData = $stateParams.doctorid;
     var doctorid = doctorData.doctorID;
-    var promise = $http.get('http://localhost:8080/Medroid/jsondoctorpatients/GetPatientsByDoctorID/' + doctorid),
+    var promise = $http.get('http://69.11.16.153/Medroid/jsondoctorpatients/GetPatientsByDoctorID/' + doctorid),
         defer = defer || $q.defer();
         
         promise.then(
@@ -31,7 +31,7 @@ var DailyRoundsMethods = {
     
    dischargePatientPromise: function(careteamid){
         var careteamID = careteamid;
-        var promise = $http.delete('http://localhost:8080/Medroid/careteams/' + careteamID),
+        var promise = $http.delete('http://69.11.16.153/Medroid/careteams/' + careteamID),
         defer = defer || $q.defer();
         
         promise.then(
@@ -50,7 +50,7 @@ var DailyRoundsMethods = {
     },
     
     getPatientStatus: function(){
-    var promise = $http.get('http://localhost:8080/Medroid/patientstatuses/'),
+    var promise = $http.get('http://69.11.16.153/Medroid/patientstatuses/'),
         defer = defer || $q.defer();
         
         promise.then(

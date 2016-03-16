@@ -6,7 +6,7 @@ var defer,
 PatientProfileMethods = {
     getAlergyPromise: function(){
         
-        var promise = $http.get('http://localhost:8080/Medroid/patientallergieses'),
+        var promise = $http.get('http://69.11.16.153/Medroid/patientallergieses'),
         defer = defer || $q.defer();
         
         promise.then(
@@ -26,7 +26,7 @@ PatientProfileMethods = {
     
     getMedicationPromise: function(){
         
-        var promise = $http.get('http://localhost:8080/Medroid/patientmedicationses'),
+        var promise = $http.get('http://69.11.16.153/Medroid/patientmedicationses'),
         defer = defer || $q.defer();
         
         promise.then(
@@ -48,7 +48,7 @@ PatientProfileMethods = {
     var patientData = $stateParams.patientid;
     var patientID = patientData.patientID;
         
-        var promise = $http.get('http://localhost:8080/Medroid/jsonpatientdoctors/GetDoctorsByPatientID/' + patientID),
+        var promise = $http.get('http://69.11.16.153/Medroid/jsonpatientdoctors/GetDoctorsByPatientID/' + patientID),
         defer = defer || $q.defer();
         
         promise.then(
@@ -67,7 +67,7 @@ PatientProfileMethods = {
     },
     
     UpdateDischargePromise: function(dischargeObject){       
-        var promise = $http.put('http://localhost:8080/Medroid/patientdischarges/'+ dischargeObject.id, dischargeObject),
+        var promise = $http.put('http://69.11.16.153/Medroid/patientdischarges/'+ dischargeObject.id, dischargeObject),
         defer = defer || $q.defer();
     
         promise.then(
@@ -89,7 +89,7 @@ PatientProfileMethods = {
         var patientData = $stateParams.patientid;
         var patientID = patientData.patientID;
         
-        var promise = $http.get('http://localhost:8080/Medroid/jsongetpatientdischarge/GetPatientDischargeByPatientID/'+ patientID),
+        var promise = $http.get('http://69.11.16.153/Medroid/jsongetpatientdischarge/GetPatientDischargeByPatientID/'+ patientID),
         defer = defer || $q.defer();
     
         promise.then(
