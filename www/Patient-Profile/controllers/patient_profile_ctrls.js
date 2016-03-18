@@ -290,10 +290,13 @@ patientprofile.controller("careteamCtrl", function($scope,$state,$stateParams,Pa
 
 patientprofile.controller("diagnosisCtrl", function($scope,$state,$stateParams,$ionicPopup,$timeout,PatientDiagnosisService){
     
-$scope.patientDiagnosis = [];
+$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
     
-$scope.patientData = $stateParams.patientid;
-$scope.patientID = $scope.patientData.patientID;
+ /*Initialized the info state inside the patient profile state*/
+    if(toState.name == 'main.patientprofile.diagnosis') {
+    $scope.patientDiagnosis = []; 
+    $scope.patientData = $stateParams.patientid;
+    $scope.patientID = $scope.patientData.patientID;
     
     $scope.onSuccess = false;
     $scope.error = false;
@@ -327,7 +330,13 @@ $scope.patientID = $scope.patientData.patientID;
             }
         }
     
-    );    
+    );  
+
+    }
+        
+});    
+    
+      
       
 $scope.addDiagnosis = function() {
     $scope.doctorData = $stateParams.doctorid;
