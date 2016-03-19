@@ -25,6 +25,14 @@ angular.module('mainlayout', [])
           url: '/patientprofile/{patientid:json}',
           templateUrl: './Patient-Profile/templates/patient_profile.html',
         });
+    
+
+        $stateProvider
+        .state('main.chat', {
+          url: '/chat/:careteamid',
+          templateUrl: './Chat/templates/chat.html',
+        });
+
 
 });
   

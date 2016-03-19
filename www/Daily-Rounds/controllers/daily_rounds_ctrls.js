@@ -100,6 +100,10 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
     $scope.patients.splice(fromIndex, 1);
     $scope.patients.splice(toIndex, 0, patient);
   };
+    
+ $scope.Chat = function(careteamID){
+     $state.go("main.chat", {careteamid:careteamID});
+ };
   
 
 });

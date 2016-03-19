@@ -23,6 +23,7 @@
     <link href="styles/docdroid.css" rel="stylesheet"/>
     <link href="styles/status.css" rel="stylesheet"/>
     <link href="styles/login.css" rel="stylesheet"/>
+    <link href="styles/chat.css" rel="stylesheet"/>
     <script src="js/app.js"></script>
     <!-- recommended location of your JavaScript code relative to other JS files -->
     <script src="xdk/init-dev.js"></script>
@@ -30,7 +31,9 @@
 <!--Initial Scripts for Docdroid-->
  <script src="js/docdroid.js"></script>
  <script src="js/routes.js"></script>
-    
+ <script src="bower_components/angular-socket-io/socket.min.js"></script>
+ <script src ="http://localhost:3000/socket.io/socket.io.js"></script>
+ 
 <!--Inital Scripts for Main layout-->
  <script src="Main-Layout/controllers/main_layout.js"></script>
  <script src="Main-Layout/controllers/main_layout_ctrls.js"></script>
@@ -51,6 +54,10 @@
  <script src="Login/controllers/login.js"></script>
  <script src="Login/services/login_service.js"></script>
  <script src="Login/controllers/login_ctrls.js"></script>
+<!--Inital Scripts for Chat -->
+ <script src="Chat/controllers/chat.js"></script>
+<script src="Chat/services/chat_services.js"></script>
+ <script src="Chat/controllers/chat_ctrls.js"></script>
 </head>
 
 <body>
