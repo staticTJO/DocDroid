@@ -9,7 +9,7 @@ chat.controller('ChatCtrl', function($scope, $stateParams, $ionicPopup, $timeout
   var TYPING_TIMER_LENGTH = 250;
 
   Socket.on('connect',function(){
-
+      Socket.emit('add user','Dr.'+$stateParams.doctorid.lastName);
   });
 
  FactoryChat.scrollBottom();

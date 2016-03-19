@@ -102,7 +102,7 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
   };
     
  $scope.Chat = function(careteamID){
-     $state.go("main.chat", {careteamid:careteamID});
+     $state.go("main.chats");
  };
   
 
