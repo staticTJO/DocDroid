@@ -1,5 +1,4 @@
 var mainlayout = angular.module('mainlayout');
-
 /**
  * Author: Julien Popa-liesz
  *
@@ -10,8 +9,23 @@ var mainlayout = angular.module('mainlayout');
  * 
  */
 
-mainlayout.controller("MenuCtrl",function($scope,$ionicSideMenuDelegate,$ionicHistory,MainService,$stateParams,$ionicPopup){
+mainlayout.controller("MenuCtrl",function($scope,$ionicSideMenuDelegate,$ionicHistory,MainService,$stateParams,$ionicPopup, FactoryChat){
   
+    //figure out the notification parameters.
+  //  var notification = FactoryChat.Notification();
+/*    var notice = true;
+    if(notice)
+        {
+    document.getElementById("changeIcon").style.color="red";
+      }
+    else{
+  document.getElementById("changeIcon").style.color="white";
+    }  
+    */
+    
+    
+    
+    
     /*Initialize Status, this will be stored in database later on*/
     
     // Need to get most updated version of record before passing it to update function.
@@ -141,15 +155,18 @@ mainlayout.controller("MenuCtrl",function($scope,$ionicSideMenuDelegate,$ionicHi
  */
 
 mainlayout.controller("notificationPopoverCtrl", function($scope,$ionicPopover){
-    
+
 $ionicPopover.fromTemplateUrl('./Main-Layout/templates/notification_popover.html', {
    $scope: $scope
   }).then(function(popover) {
     $scope.popover = popover;
-  });
+    
+});
     
 $scope.openPopover = function($event) {
-$scope.popover.show($event);
+    $scope.popover.show($event);
+   //once notification is clicked, change the notification color back to white.
+   /* document.getElementById("changeIcon").style.color="white";*/
   };
   $scope.closePopover = function() {
     $scope.popover.hide();

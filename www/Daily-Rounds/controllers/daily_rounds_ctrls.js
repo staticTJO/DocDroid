@@ -1,6 +1,6 @@
 var dailyrounds = angular.module('dailyrounds');
 
-dailyrounds.controller("DailyRoundsCtrl", function($scope,$state,DailyRoundsService, $ionicPopup,$stateParams){
+dailyrounds.controller("DailyRoundsCtrl", function($scope,$state,DailyRoundsService, $ionicPopup,$stateParams,$timeout, Socket, FactoryChat){
     
 $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
     
@@ -101,9 +101,13 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
     $scope.patients.splice(toIndex, 0, patient);
   };
     
- $scope.Chat = function(careteamID){
+ $scope.ChatRoom = function(careteamID){
      $state.go("main.chats");
  };
-  
-
+   $scope.createRoom = function(careteamID){
+       Socket.emit('add user','Dr.'+$stateParams.doctorid.lastName);
+      Socket.emit('room', careteamID);
+ $state.go("main.chats");
+   };
+ 
 });

@@ -1,6 +1,7 @@
 var chat = angular.module('chat');
 
-chat.controller('ChatCtrl', function($scope, $stateParams, $ionicPopup, $timeout, Socket, FactoryChat) {
+chat.controller('ChatCtrl', function($scope, $stateParams, $ionicPopup, $timeout, Socket, FactoryChat)
+{
   $scope.data = {};
   $scope.data.message = "";
   $scope.messages = FactoryChat.getMessages();
@@ -9,7 +10,7 @@ chat.controller('ChatCtrl', function($scope, $stateParams, $ionicPopup, $timeout
   var TYPING_TIMER_LENGTH = 250;
 
   Socket.on('connect',function(){
-      Socket.emit('add user','Dr.'+$stateParams.doctorid.lastName);
+      //Socket.emit('add user','Dr.'+$stateParams.doctorid.lastName);
   });
 
  FactoryChat.scrollBottom();
@@ -70,12 +71,11 @@ chat.controller('AccountCtrl', function($scope, Chat) {
   $scope.username = Chat.getUsername();  
 }, true);
 
-chat.controller('listCtrl', function($scope, $http){
-  $http.get('http://localhost:8080/Medroid/careteams.jsonArray').then(function(data){
-      $scope.careteam = data;
-      
-  });  
-    $scope.createRoom = function(newroom){
-        mySocket.emit('switch room', newroom);
+chat.controller('roomCtrl', function($scope,$state){
+   //var careteamID = "123"
+    $scope.createRoom = function(careteamID){
+      Socket.emit('room', careteamID);
     };
+    $state.go("main.chats" + careteamID);
+    
 });

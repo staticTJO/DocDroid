@@ -4,7 +4,7 @@ var chatFactory = angular.module('chat');
 
  chatFactory.factory('Socket', function(socketFactory){
   //  var myIoSocket = io.connect('http://chat.socket.io:80');
-      var myIoSocket = io.connect('http://localhost:3000');
+      var myIoSocket = io.connect('http://69.11.16.153:3000/');
     mySocket = socketFactory({
     ioSocket: myIoSocket
   });

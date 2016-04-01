@@ -25,15 +25,6 @@ angular.module('mainlayout', [])
           url: '/patientprofile/{patientid:json}',
           templateUrl: './Patient-Profile/templates/patient_profile.html',
         });
-    
-
-
-/*  // setup an abstract state for the tabs directive
-    .state('main.tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: './Chat/templates/tabs.html'
-  })*/
 
   // Each tab has its own nav history stack:
 $stateProvider
@@ -42,34 +33,7 @@ $stateProvider
     templateUrl: './Chat/templates/tab-chats.html',
   });
 
-/*  .state('main.tab.users', {
-      url: '/users',
-      views: {
-        'tab-users': {
-          templateUrl: './Chat/templates/tab-users.html',
-        }
-      }
-    })*/
 
-/*    .state('main.tab.list', {
-      url: '/list',
-      views: {
-        'tab-list': {
-          templateUrl: './Chat/templates/tab-list.html',
-          controller: 'listCtrl'
-        }
-      }
-    })*/
-/*  
-  .state('main.tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: './Chat/templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  });*/
 
 
 
