@@ -1,9 +1,9 @@
 <div ng-controller ="ChatCtrl"> 
 <ion-view view-title="Chats">
 
-<ion-content>
+<ion-content class="padding-horizontal" scroll="true">
     
-<section class="chats">
+<section class="chats" >
 
     <span ng-repeat="message in messages">
       <span ng-show="!message.notification">
